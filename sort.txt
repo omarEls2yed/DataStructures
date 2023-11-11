@@ -1,0 +1,118 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <climits>
+#include <cmath>
+#include <complex>
+#include <cstring>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <vector>
+#include <stack>
+#include <unordered_set>
+#include <unordered_map>
+#include <algorithm>
+#include <fstream>
+#include <bitset>
+using namespace std;
+#define ll long long
+#define all(v) (v).begin(), (v).end()
+#define sz(n) int(n.size())
+#define endl '\n'
+#define OO 1e18/////////////
+#define OOO -1e9;
+#define cin(vec) for(auto& i : vec) cin >> i
+#define cout(vec) for(auto& i : vec) cout << i << " ";
+#define pi 3.14159265
+#define dpp(arr,t)memset(arr,t,sizeof(arr))
+const int sizee = 1e5 + 99;
+ll gcd(ll a, ll b) { return b == 0 ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+const int N = 1e5 + 5; ll mod = 1000000007;
+int di[8] = { 0, 0, 1, 1, 1, -1, -1, -1 };
+int dj[8] = { 1, -1, 0, -1, 1, 0, 1, -1 };
+void selectionsort(vector<ll>v){
+	//o(n2)
+	//for every indx u select the mini value u can but in this indx
+	for (int i = 0; i < v.size()-1; i++) {
+		int minidx = i;
+		for (int j = i + 1; j < v.size(); j++) {
+			if (v[j] < v[minidx]){
+				minidx = j;
+			}swap(v[minidx],v[i]);
+		}
+	}
+}
+void bubblesort(vector<ll>v){
+	//o(n2)
+	for (int i = 0; i < v.size() - 1; i++) {
+		for (int j = 0; j < v.size() - i - 1; j++) {
+			if (v[j] > v[j + 1]) {
+				swap(v[i], v[j + 1]);
+			}
+		}
+	}
+}
+void Insertion_Sort(vector<ll>v) {
+	//o(n2)
+	// for every indx u insert v[indx] to the correct place and shift
+	// u compare every element with the right element and shift 
+	for (int i = 1; i < v.size(); i++) {
+		int value = v[i];
+		int j = i-1;
+		while (j >= 0 and v[j] > value){
+			v[j+1] = v[j];//shift
+			j--;
+		}v[j+1] = value;
+	}
+}
+void MergeTwoArray(vector<ll>v,ll l,ll mid,ll r){
+	int sizeof1 = mid-l+1;
+	int sizeof2 = r - mid;
+	int* arr1 = new int[sizeof1];
+	int* arr2 = new int[sizeof2];
+	for (int i = 0; i < sizeof1; i++){
+		arr1[i] = v[l+i];
+	}
+	for (int i = 0; i < sizeof2; i++){
+		arr2[i] = v[mid+i+1];
+	}int idx=l,i=0,j=0;
+	while(i<sizeof1 and j<sizeof2){
+		if (arr1[i] <= arr2[j]) {
+			v[idx] = arr1[i];i++;
+		}
+		else {
+			v[idx] = arr2[j];j++;
+		}idx++;
+	}
+	while (i < sizeof1) {
+		v[idx] = arr1[i];
+		i++,idx++;
+	}
+	while (j < sizeof2) {
+		v[idx] = arr2[j];
+		j++,idx++;
+	}
+}
+void Merge_Sort(vector<ll>v,ll l , ll r) {
+	//devide and conquer
+	//o(nlogn)
+	if (l < r) {
+		ll mid = (l+r)/2;
+		Merge_Sort(v,l,mid);//devide
+		Merge_Sort(v,mid+1,r);//devide
+		MergeTwoArray(v,l,mid,r);//conquer
+	}
+}
+signed main() {
+	
+}
